@@ -14,11 +14,18 @@ class TasksController extends Controller
         return view('tasks.index', compact('tasks'));
     }
 
-    public function show($id)
+    /**
+     * Route Model Binding
+     * Specify the param type: Task, match wildcard {tasks} with param variable name $tasks
+     * @param Task $task
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Task $task)
     {
-        $task = Task::find($id);
+        //$task = Task::find($tasks);
+        return $task;
 
         //dd($task);        // die and dump.. will also show the value of the variable.
-        return view('tasks.show', compact('task'));
+        //return view('tasks.show', compact('task'));
     }
 }

@@ -45,4 +45,10 @@ Route::get('/passdata', function () {
 });
 
 Route::get('/tasks', 'TasksController@index');
+
+/**
+ * Route Model Binding
+ * wild card {task} variable must match with variable name '$task' in the Controller show method.
+ * Specify the param type in method: Task
+ */
 Route::get('/tasks/{task}', 'TasksController@show');
