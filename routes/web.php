@@ -44,16 +44,5 @@ Route::get('/passdata', function () {
     ]);
 });
 
-Route::get('/tasks', function () {
-    $tasks = DB::table('tasks')->get();
-
-    //return $tasks;  // this will automatically cast to json format in the page. easier for APIs
-    return view('tasks/index', compact('tasks'));
-});
-
-Route::get('/tasks/{id}', function ($id) {
-    $task = DB::table('tasks')->find($id);
-
-    //dd($task);        // die and dump.. will also show the value of the variable.
-    return view('tasks.show', compact('task'));
-});
+Route::get('/tasks', 'TasksController@index');
+Route::get('/tasks/{task}', 'TasksController@show');
