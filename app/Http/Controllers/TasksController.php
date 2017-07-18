@@ -23,9 +23,9 @@ class TasksController extends Controller
     public function show(Task $task)
     {
         //$task = Task::find($tasks);
-        return $task;
+        //return $task;
 
         //dd($task);        // die and dump.. will also show the value of the variable.
-        //return view('tasks.show', compact('task'));
+        return view('tasks.show', compact('task'));
     }
 }

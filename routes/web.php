@@ -11,10 +11,20 @@
 |
 */
 
-// This is a Route with closure function
+/**
+ * This is a Route with closure function
 Route::get('/', function () {
     return view('welcome');
 });
+ */
+
+/**
+ * Controller => PostsController
+ * Eloquent Model => Post
+ * Migration => create_posts_table
+ * php artisan make:model Post -mc
+ */
+Route::get('/', 'PostsController@index');
 
 // Passing data to View
 Route::get('/about', function () {
