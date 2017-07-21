@@ -19,12 +19,22 @@ Route::get('/', function () {
  */
 
 /**
- * Controller => PostsController
- * Eloquent Model => Post
- * Migration => create_posts_table
+ * Controller       => PostsController
+ * Eloquent Model   => Post
+ * Migration        => create_posts_table
  * php artisan make:model Post -mc
+ *
+ * View             GET         /posts
+ * Create           GET         /posts/create
+ * Submit           POST        /posts/
+ * View Specific    GET         /posts/{id}
+ * Edit             GET         /posts/{id}/edit
+ * Submit Edit      PATCH       /posts/{id}
+ * Delete           DELETE      /posts/{id}
  */
 Route::get('/', 'PostsController@index');
+Route::get('/posts/create', 'PostsController@create');
+Route::post('/posts', 'PostsController@store');
 
 // Passing data to View
 Route::get('/about', function () {
