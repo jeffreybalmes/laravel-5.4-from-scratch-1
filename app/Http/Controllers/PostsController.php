@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class PostsController extends Controller
 {
@@ -21,8 +22,26 @@ class PostsController extends Controller
         //dd(request()->all());                 // see what contains in request() data.
         //dd(request('body'));                  // request just the title
         //dd(request(['title', 'body']));       // request just the title and the body
+        /**
         // Create a new post using the request data.
+        $post = new Post;=
+        $post->title = request('title');
+        $post->body = request('body');
         // Save it to the database.
+        $post->save();
+        */
+        /**
+        // All the above creating and saving post to database can be done by following with $fillable section in Post Model
+        Post::create([
+            'title' => request('title'),
+            'body' => request('body'),
+        ]);
+        */
+
+        // Above can also be done this way.
+        Post::create(request(['title', 'body']));
+
         // And then redirect to the home page...
+        return redirect('/');
     }
 }
