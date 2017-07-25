@@ -22,6 +22,13 @@ class PostsController extends Controller
         //dd(request()->all());                 // see what contains in request() data.
         //dd(request('body'));                  // request just the title
         //dd(request(['title', 'body']));       // request just the title and the body
+
+        // Validate the input data (server side validation), redirects to same page when validation fails.
+        $this->validate(request(), [
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
         /**
         // Create a new post using the request data.
         $post = new Post;=
