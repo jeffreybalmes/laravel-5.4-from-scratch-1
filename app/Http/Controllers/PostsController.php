@@ -9,7 +9,8 @@ class PostsController extends Controller
 {
     public function index()
     {
-        return view('posts.index');     // posts/index.blade.php
+        $posts = Post::latest()->get();
+        return view('posts.index', compact('posts'));     // posts/index.blade.php
     }
 
     public function create()
@@ -50,5 +51,10 @@ class PostsController extends Controller
 
         // And then redirect to the home page...
         return redirect('/');
+    }
+
+    public function show(Post $post)
+    {
+        return view('posts.show', compact('post'));
     }
 }
