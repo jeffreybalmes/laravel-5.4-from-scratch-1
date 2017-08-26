@@ -20,8 +20,13 @@ class RegistrationController extends Controller
             'password'=> 'required|confirmed',
         ]);
 
-        // create and sae the user.
-        $user = User::create(request(['name', 'email', 'password']));
+        // create and save the user.
+        //$user = User::create(request(['name', 'email', bcrypt('password')]));
+        $user = User::create([
+            'name' => request('name'),
+            'email'=> request('email'),
+            'password' => bcrypt(request('password'))
+        ]);
 
         // sign them in
         //\Auth::login();       // to use Facade, must import 'use Auth' at top of class,

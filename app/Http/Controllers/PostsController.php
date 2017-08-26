@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Carbon\Carbon;
 
 class PostsController extends Controller
 {
@@ -14,8 +15,31 @@ class PostsController extends Controller
 
     public function index()
     {
-        $posts = Post::latest()->get();
-        return view('posts.index', compact('posts'));     // posts/index.blade.php
+//        $posts = Post::latest()->get();
+//
+//        if ($month = request('month')) {
+//            $posts->whereMonth('created_at', Carbon::parse($month)->month);
+//        }
+//
+//        if ($year = request('year')) {
+//            $posts->whereYear('created_at', $year);
+//        }
+//
+//        $posts = $posts->get();
+
+        // Above can be refactored as:
+        $posts = Post::latest()
+            ->filter(request(['month', 'year']))
+            ->get();
+
+        $archives = Post::selectRaw('year(created_at) year, monthname(created_at) month, count(*) published')
+            ->groupBy('year', 'month')
+            ->orderByRaw('min(created_at)')
+            ->get()
+            ->toArray();
+
+
+        return view('posts.index', compact('posts', 'archives'));     // posts/index.blade.php
     }
 
     public function create()
@@ -51,12 +75,19 @@ class PostsController extends Controller
         ]);
         */
 
-        // Above can also be done this way.
+        /*
+        // Again, the above can also be done this way.
         Post::create([
             'title' => request('title'),
             'body' => request('body'),
             'user_id' => auth()->id(),
         ]);
+        */
+
+        // Once again, the above can be done following way as well.
+        auth()->user()->publish(
+            new Post(request(['title', 'body']))
+        );
 
         // And then redirect to the home page...
         return redirect('/');
