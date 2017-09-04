@@ -12,6 +12,18 @@
 */
 
 /**
+ * Service Container: Binding App with Stripe class
+ */
+App::bind('App\Billing\Stripe', function(){
+    return new \App\Billing\Stripe(config('services.stripe.secret'));
+});
+
+// Resolve the Service Container Binding out of container with ::make() Facade or resolve() helper function
+//$stripe = App::make('App\Billing\Stripe');        // using App::make() Facade
+$stripe = resolve('App\Billing\Stripe');     // using resolve() helper function
+
+dd($stripe);
+/**
  * This is a Route with closure function
 Route::get('/', function () {
     return view('welcome');
