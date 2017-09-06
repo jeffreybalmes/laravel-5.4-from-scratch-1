@@ -9,7 +9,7 @@ use Psy\Util\Str;
 class AppServiceProvider extends ServiceProvider
 {
     protected $defer = true;    // resolution is delayed and executed when necessary
-    
+
     /**
      * Bootstrap any application services.
      * when any view is loaded with View Composer, listen to the hook and pass function/class path

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Mail\Welcome;
 
 class RegistrationController extends Controller
 {
@@ -31,6 +32,9 @@ class RegistrationController extends Controller
         // sign them in
         //\Auth::login();       // to use Facade, must import 'use Auth' at top of class,
         auth()->login($user);   // auth() function can directly be called.
+
+        // Send Welcome Email to user when they sign up.
+        \Mail::to($user)->send(new Welcome($user));
 
         // redirect to the home page.
         //return redirect('/');

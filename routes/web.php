@@ -13,9 +13,9 @@
 
 // Resolve the Service Container Binding out of container with ::make() Facade or resolve() helper function
 //$stripe = App::make('App\Billing\Stripe');        // using App::make() Facade
-$stripe = resolve('App\Billing\Stripe');     // using resolve() helper function
+//$stripe = resolve('App\Billing\Stripe');     // using resolve() helper function
 
-dd($stripe);
+//dd($stripe);
 /**
  * This is a Route with closure function
 Route::get('/', function () {
