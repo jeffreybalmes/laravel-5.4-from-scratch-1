@@ -16,6 +16,8 @@ class PostsController extends Controller
 
     public function index(Posts $posts)
     {
+        // fetch and flash the session()
+        //return session('message');
 //        $posts = Post::latest()->get();
 //
 //        if ($month = request('month')) {
@@ -87,6 +89,11 @@ class PostsController extends Controller
         // Once again, the above can be done following way as well.
         auth()->user()->publish(
             new Post(request(['title', 'body']))
+        );
+
+        // Flash the message
+        session()->flash(
+            'message', 'Your post has now been published'
         );
 
         // And then redirect to the home page...
